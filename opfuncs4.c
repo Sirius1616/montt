@@ -35,78 +35,77 @@ void pchar(stack_t **stack, unsigned int line_number)
 
 void pstr(stack_t **stack, unsigned int line_number)
 {
-    stack_t *node = *stack;
-    (void)line_number;
+	stack_t *node = *stack;
+	(void)line_number;
 
-    if (node == NULL)
-    {
-        putchar('\n');
-        free(load.buf);
-        free_stack(*stack);
-        fclose(load.file);
-        exit(EXIT_FAILURE);
-    }
+	if (node == NULL)
+	{
+		putchar('\n');
+		free(load.buf);
+		free_stack(*stack);
+		fclose(load.file);
+		exit(EXIT_FAILURE);
+	}
 
-    for (; node != NULL; node = node->next)
-    {
-        if (node->n == 0 || !node->n || node->n < 0 || node->n > 127)
-            break;
+	for (; node != NULL; node = node->next)
+	{
+	if (node->n == 0 || !node->n || node->n < 0 || node->n > 127)
+		break;
 
-        printf("%c", (char)node->n);
-    }
-    putchar('\n');
+	printf("%c", (char)node->n);
+	}
+	putchar('\n');
 }
 
 void rotl(stack_t **stack, unsigned int line_number)
 {
-    stack_t *node = *stack;
-    stack_t *ptr = NULL;
-    stack_t *ptr2 = NULL;
-    (void)line_number;
+	stack_t *node = *stack;
+	stack_t *ptr = NULL;
+	stack_t *ptr2 = NULL;
+	(void)line_number;
 
-    if (node == NULL || node->next == NULL)
-        return;
+	if (node == NULL || node->next == NULL)
+		return;
 
-    ptr = node->next;
-    ptr2 = node;
+	ptr = node->next;
+	ptr2 = node;
 
-    while (ptr2->next != NULL)
-    {
-        ptr2 = ptr2->next;
-    }
+	while (ptr2->next != NULL)
+	{
+		ptr2 = ptr2->next;
+	}
 
-    ptr->prev = NULL;
-    ptr2->next = node;
-    node->next = NULL;
-    node->prev = ptr2;
-    *stack = ptr;
+	ptr->prev = NULL;
+	ptr2->next = node;
+	node->next = NULL;
+	node->prev = ptr2;
+	*stack = ptr;
 }
 
 void rotr(stack_t **stack, unsigned int line_number)
 {
-    stack_t *node = *stack;
-    stack_t *ptr = NULL;
-    (void)line_number;
+	stack_t *node = *stack;
+	stack_t *ptr = NULL;
+	(void)line_number;
 
-    if (node == NULL || node->next == NULL)
-        return;
+	if (node == NULL || node->next == NULL)
+		return;
 
-    while (node != NULL)
-    {
-        ptr->prev = node->next;
-        node = node->next;
-        ptr = ptr->prev;
-    }
+	while (node != NULL)
+	{
+		ptr->prev = node->next;
+		node = node->next;
+		ptr = ptr->prev;
+	}
 
-    ptr = node;
+	ptr = node;
 
-    for (; ptr->next != NULL; ptr = ptr->next)
-    {
-    }
-
-    ptr->prev->next = NULL;
-    ptr->next = *stack;
-    (*stack)->prev = ptr;
-    ptr->prev = NULL;
-    *stack = ptr;
+	for (; ptr->next != NULL; ptr = ptr->next)
+	{
+	}
+	ptr->prev->next = NULL;
+	ptr->next = *stack;
+	(*stack)->prev = ptr;
+	ptr->prev = NULL;
+	*stack = ptr;
 }

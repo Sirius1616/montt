@@ -10,47 +10,46 @@ void (*getfunc(char **avcode, stack_t **stack))(stack_t **, unsigned int)
 {	char *code, *element;
 	int i;
 
-    instruction_t ops[] = {
-        {"push", push},
-        {"pall", pall},
-        {"pint", pint},
-        {"pop", pop},
-        {"nop", nop},
-        {"swap", swap},
-        {"add", add},
-        {"sub", sub},
-        {"div", op_div},
-        {"mul", mul},
-        {"mod", mod},
-        {"pchar", pchar},
-        {"pstr", pstr},
-        {"rotl", rotl},
-        {"rotr", rotr},
-        {NULL, NULL}};
+	instruction_t ops[] = {
+	{"push", push},
+	{"pall", pall},
+	{"pint", pint},
+	{"pop", pop},
+	{"nop", nop},
+	{"swap", swap},
+	{"add", add},
+	{"sub", sub},
+	{"div", op_div},
+	{"mul", mul},
+	{"mod", mod},
+	{"pchar", pchar},
+	{"pstr", pstr},
+	{"rotl", rotl},
+	{"rotr", rotr},
+	{NULL, NULL}};
 
 
-    for (i = 0; ops[i].opcode != NULL; i++)
-    {
-        code = avcode[0];
-        if (strcmp("push", code) == 0)
-        {
-            element = avcode[1];
-            if (!digit(element))
-            {
-                fprintf(stderr, "L%d: usage: push integer\n", load.count);
-                free_stack(*stack);
-                free_av(avcode);
-                fclose(load.file);
-                exit(EXIT_FAILURE);
-            }
-        }
-
-        if (strcmp(ops[i].opcode, code) == 0)
-        {
-            return (ops[i].f);
-        }
-    }
-    return (NULL);
+	for (i = 0; ops[i].opcode != NULL; i++)
+	{
+		code = avcode[0];
+		if (strcmp("push", code) == 0)
+	{
+		element = avcode[1];
+		if (!digit(element))
+	{
+		fprintf(stderr, "L%d: usage: push integer\n", load.count);
+		free_stack(*stack);
+		free_av(avcode);
+		fclose(load.file);
+		exit(EXIT_FAILURE);
+	}
+	}
+		if (strcmp(ops[i].opcode, code) == 0)
+		{
+		return (ops[i].f);
+		}
+	}
+	return (NULL);
 }
 
 /**
@@ -94,11 +93,11 @@ void push(stack_t **stack, unsigned int line_number)
 
 void pall(stack_t **stack, unsigned int line_number)
 {
-    stack_t *node;
-    (void)line_number;
+	stack_t *node;
+	(void)line_number;
 
-    for (node = *stack; node != NULL; node = node->next)
-    {
-        printf("%d\n", node->n);
-    }
+	for (node = *stack; node != NULL; node = node->next)
+	{
+		printf("%d\n", node->n);
+	}
 }
